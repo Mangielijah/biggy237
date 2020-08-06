@@ -6,7 +6,12 @@ import 'package:biggy237/model/user_model.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
   final FacebookLogin _facebookLogin = FacebookLogin();
 
   FirebaseAuth get firebaseAuth => _firebaseAuth;

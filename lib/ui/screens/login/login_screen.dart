@@ -1,6 +1,8 @@
 import 'package:biggy237/services/firebase_auth.service.dart';
 import 'package:biggy237/strings.dart';
 import 'package:biggy237/style.dart';
+import 'package:biggy237/ui/screens/login/components/facebook_sign_in_btn.dart';
+import 'package:biggy237/ui/screens/login/components/google_sign_in_btn.dart';
 import 'package:biggy237/ui/screens/login/components/login_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,41 +13,13 @@ class LoginScreen extends StatelessWidget {
     FirebaseAuthService firebaseAuth =
         Provider.of<FirebaseAuthService>(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black87,
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Container(
-            height: screenHeight(context) * 3 - 50,
-            padding: EdgeInsets.all(10),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 14.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  SizedBox(height: 18),
-                  Center(
-                    child: Text(
-                      Strings.app_name,
-                      style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.1),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: (screenHeight(context) / 4) * 2 - 25,
-                    child: LoginImage(
-                      "Cameroons Number One Reality Show",
-                      "images/earn.jpg",
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          LoginImage(
+            "Cameroons Number One Reality Show",
+            "assets/images/logo.png",
           ),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 18, vertical: 8),
@@ -64,33 +38,8 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: 12.0,
                 ),
-                RawMaterialButton(
-                  onPressed: () => firebaseAuth.signInWithGoogle(),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey[300]),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image(
-                          height: 24,
-                          image: AssetImage("images/google.png"),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          Strings.googleText,
-                          style: TextStyle(fontSize: 17, letterSpacing: 0.25),
-                        ),
-                      ],
-                    ),
-                  ),
+                GoogleSignInButton(
+                  onTap: firebaseAuth,
                 ),
                 SizedBox(
                   height: 12,
@@ -106,41 +55,9 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: 12,
                 ),
-                RawMaterialButton(
-                  onPressed: () => firebaseAuth.signInWithFacebook(),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  splashColor: Colors.blueGrey,
-                  fillColor: Color(0xff3b5998),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey[300]),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image(
-                          height: 24,
-                          image: AssetImage("images/fbp.png"),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          Strings.facebookText,
-                          style: TextStyle(
-                            fontSize: 17,
-                            letterSpacing: 0.25,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                FaceBookSignInBtn(
+                  onTap: firebaseAuth,
+                )
               ],
             ),
           )
